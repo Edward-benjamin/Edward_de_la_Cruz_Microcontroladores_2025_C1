@@ -3,27 +3,26 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#define LED_PIN 2  
+#define LED_PIN 2
 
-bool led_state = false;  
-
-void task_toggle_led(void *pvParameter);  
+void led_task(void *pvParameter);
 
 void app_main(void)
 {
     gpio_reset_pin(LED_PIN);
     gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
-
-    xTaskCreate(task_toggle_led, "Task LED Blink", 2048, NULL, 5, NULL);
+    
+    xTaskCreate(&led_task, "LED Task", 2048, NULL, 5, NULL);
 }
 
-void task_toggle_led(void *pvParameter)
+void led_task(void *pvParameter)
 {
-    while (true)  
+    uint8_t estado = 0;
+    while (1)
     {
-        led_state = !led_state;
-        gpio_set_level(LED_PIN, led_state);
-        printf("LED ahora está: %s\n", led_state ? "ON" : "OFF");
-        vTaskDelay(pdMS_TO_TICKS(150));  
+        estado = !estado;
+        gpio_set_level(LED_PIN, estado);
+        printf("LED Status: %u\n", estado);
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
