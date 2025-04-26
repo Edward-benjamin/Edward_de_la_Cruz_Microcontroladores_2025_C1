@@ -13,8 +13,8 @@
 #include <stdio.h>
 
 #define TAG "APP"
-#define WIFI_SSID "your_SSID"
-#define WIFI_PASS "your_PASSWORD"
+#define WIFI_SSID "Edward_555"
+#define WIFI_PASS "12345678"
 
 const char html_index[] =
 "<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"UTF-8\">"
